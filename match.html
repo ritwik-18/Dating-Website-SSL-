@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        /* Styling for container holding profiles and try again button */
+        #profilesContainer {
+            position: relative; /* Set position relative for positioning the button */
+        }
+        /* Styling for try again button container */
+        #tryAgainButtonContainer {
+            position: absolute;
+            bottom: 10px; /* Adjust as needed */
+            right: 10px; /* Adjust as needed */
+        }
+        #mail{
+            position: absolute;
+            bottom: 10px; /* Adjust as needed */
+            right: 900px; /* Adjust as needed */
+        }
+        /* Styling for buttons */
+        .button {
+            background-color: brown;
+            color: rgb(7, 12, 17);
+            box-sizing: border-box;
+            border-radius: 10px;
+            width: 100%;
+            padding: 5px;
+            margin: 5px;
+        }
+        /* Hover effect for buttons */
+        .button:hover {
+            background-color: pink;
+        }
+        /* Styling for heading */
+        h1 {
+            text-align: center;
+            color: rgb(92, 11, 11);
+        }
+        /* Styling for body */
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: grid;
+            height: 100vh;
+            place-items: center;
+        }
+        /* Styling for profile */
+        .profile {
+            display: flex; /* Use flexbox */
+            align-items: center; /* Center items vertically */
+        }
+        /* Styling for profile image */
+        .profile img {
+            width: 300px;
+            height: auto;
+            margin-right: 50px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        /* Styling for profile information */
+        .profile-info {
+            flex: 10; /* Grow to fill remaining space */
+        }
+        .profile-info h2 {
+            margin-bottom: 10px;
+        }
+        .profile-info p {
+            margin-bottom: 5px;
+        }
+        /* Styling for fieldset */
+        fieldset {
+            width: 1000px;
+            height: 500px;
+            border: 1px solid black;
+            background-color: rgb(223, 97, 118);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <fieldset id="profilesContainer">
+        <!-- Title with user's name -->
+        <b><h1>Hey <span id="Usname"></span>!!! Here's your Match..</h1></b>
+        <!-- Container for try again button -->
+        <div id="tryAgainButtonContainer">
+            <input type="button" class="button" value="Wanna try again?" onclick="window.location.href='dating.html'">
+        </div>
+        <div id="mail">
+            <input type="button" class="button" value="Mail him/her">
+        </div>
+    </fieldset>
+
+    <script>
+        // Retrieve stored name from local storage
+        var Name = localStorage.getItem('name');
+        // Retrieve user's name from local storage
+        var Usname = localStorage.getItem('Name');
+        // Display user's name in the HTML
+        document.getElementById('Usname').innerHTML = Usname;
+        // Check if the name is not found
+        if (Name == "NotFound") {
+            // Hide profiles container
+            profilesContainer.style.display = 'none';
+            // Display try again button container
+            document.getElementById('tryAgainButtonContainer').style.display = 'block';
+            // Change background image to error image
+            document.body.style.backgroundImage = "url('error.png')";
+        } else {
+            // If name is found, fetch data from students.json
+            fetch('students.json')
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(data){
+                var student = data;
+                var userIndex;
+                var userexists = false;
+                for (var i = 0; i < student.length; i++) {
+                    if (student[i].Name == Name) {
+                        userexists = true;
+                        userIndex = i;
+                        // Create elements for displaying user's profile
+                        const profileDiv = document.createElement('div');
+                        profileDiv.classList.add('profile');
+
+                        const section = document.createElement('section');
+                        section.classList.add('section');
+
+                        const aside = document.createElement('aside');
+                        aside.classList.add('aside');
+
+                        const name = document.createElement('h2');
+                        name.textContent = student[i].Name;
+
+                        const age = document.createElement('p');
+                        age.textContent = 'Age: ' + student[i].Age;
+
+                        const gender = document.createElement('p');
+                        gender.textContent = 'Gender: ' + student[i].Gender;
+
+                        const roll = document.createElement('p');
+                        roll.textContent = 'Roll Number: ' + student[i]['IITB Roll Number'];
+
+                        const year = document.createElement('p');
+                        year.textContent = 'Year of Study: ' + student[i]['Year of Study'];
+
+                        const interestsPara = document.createElement('p');
+                        interestsPara.textContent = 'Interests: ' + student[i].Interests.join(', ');
+
+                        const hobbiesPara = document.createElement('p');
+                        hobbiesPara.textContent = 'Hobbies: ' + student[i].Hobbies.join(', ');
+
+                        const email = document.createElement('p');
+                        email.textContent = 'Email: ' + student[i].Email;
+
+                        const photoImg = document.createElement('img');
+                        photoImg.src = student[i].Photo;
+                        photoImg.alt = student.name + "'s Photo";
+
+                        // Append elements to aside and section
+                        aside.appendChild(name);
+                        aside.appendChild(age);
+                        aside.appendChild(gender);
+                        aside.appendChild(roll);
+                        aside.appendChild(year);
+                        aside.appendChild(interestsPara);
+                        aside.appendChild(hobbiesPara);
+                        aside.appendChild(email);
+                        section.appendChild(photoImg);
+
+                        // Append aside and section to profile div
+                        profileDiv.appendChild(section);
+                        profileDiv.appendChild(aside);
+
+                        // Append profile div to profiles container
+                        profilesContainer.appendChild(profileDiv);
+                        break;
+                    }
+                }
+            });
+        }   
+    </script>
+</body>
+</html>

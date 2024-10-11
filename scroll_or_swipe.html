@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll/Swipe Interface</title>
+    <!-- Internal CSS styling -->
+    <style>
+        body {
+            /* Background styling */
+            background-image: url('couple.png');
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the background image */
+            background-attachment: fixed; /* Fixed background image */
+            display: grid;
+            place-items: center; /* Center the content both horizontally and vertically */
+        }
+        /* Styling for individual profile */
+        .profile {
+            position: relative;
+            display: flex;
+            align-items: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 30px; /* Spacing between profiles */
+            background-color: #e0bde4; /* Background color for the profile */
+            transition: box-shadow 0.3s ease; /* Smooth transition for box-shadow */
+            width: 1000px; /* Make the profile boxes full width */
+            max-width: 1000px; /* Limit the maximum width of profiles */
+        }
+        /* Hover effect for profiles */
+        .profile:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+        }
+        /* Styling for profile image */
+        .profile img {
+            width: 300px; /* Adjust the width of the profile image */
+            height: auto; /* Auto height to maintain aspect ratio */
+            border-top-left-radius: 12px; /* Rounded corners */
+            border-bottom-left-radius: 12px;
+            padding: 20px; /* Spacing around the image */
+        }
+        /* Styling for profile information */
+        .profile-info {
+            flex: 1; /* Allow the profile info section to expand */
+        }
+        .profile-info h2 {
+            margin-bottom: 15px; /* Increase the margin */
+            font-size: 1.8rem; /* Increase the font size */
+            color: #333; /* Text color */
+        }
+        .profile-info p {
+            margin-bottom: 10px; /* Increase the margin */
+            font-size: 1.2rem; /* Increase the font size */
+            color: #666; /* Text color */
+        }
+        .profile-info p:first-child {
+            font-weight: bold; /* Bold font for first paragraph */
+        }
+        .profile-info p:last-child {
+            margin-bottom: 0; /* Remove margin from last paragraph */
+        }
+        /* Styling for like button */
+        .like-button {
+            position: absolute;
+            bottom: 10%; /* Positioning from the bottom */
+            right: 3%; /* Positioning from the right */
+            cursor: pointer; /* Cursor style */
+            background-color: #4CAF50; /* Background color */
+            border: none; /* No border */
+            color: white; /* Text color */
+            padding: 10px 20px; /* Padding */
+            text-align: center; /* Center align text */
+            text-decoration: none; /* Remove underline from text */
+            display: inline-block; /* Display as inline-block */
+            font-size: 16px; /* Font size */
+            margin-top: 10px; /* Spacing from the top */
+            border-radius: 5px; /* Rounded corners */
+        }
+    </style>
+</head>
+<body>
+    <div id="profilesContainer"></div>
+    <!-- Scroll to top button -->
+    <div class="scroll-arrow" onclick="scrollToTop()">
+        &#8593; <!-- Unicode character for up arrow -->
+    </div>
+
+    <script>
+        // Function to scroll to top smoothly
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Smooth scroll behavior
+            });
+        }
+        // Fetch data from students.json
+        fetch('students.json')
+            .then(function(response) {
+                return response.json(); // Parse JSON data
+            })
+            .then(function(data) {
+                const profilesContainer = document.getElementById('profilesContainer');
+
+                // Loop through each student and create a profile
+                data.forEach(function(student) {
+                    const profileDiv = document.createElement('div');
+                    profileDiv.classList.add('profile');
+
+                    const section = document.createElement('section');
+                    section.classList.add('section');
+
+                    const aside = document.createElement('aside');
+                    aside.classList.add('aside');
+
+                    const name = document.createElement('h2');
+                    name.textContent = student.Name;
+
+                    const age = document.createElement('p');
+                    age.textContent = 'Age: ' + student.Age;
+
+                    const gender = document.createElement('p');
+                    gender.textContent = 'Gender: ' + student.Gender;
+
+                    const roll = document.createElement('p');
+                    roll.textContent = 'Roll Number: ' + student['IITB Roll Number'];
+
+                    const year = document.createElement('p');
+                    year.textContent = 'Year of Study: ' + student['Year of Study'];
+
+                    const interestsPara = document.createElement('p');
+                    interestsPara.textContent = 'Interests: ' + student.Interests.join(', ');
+
+                    const hobbiesPara = document.createElement('p');
+                    hobbiesPara.textContent = 'Hobbies: ' + student.Hobbies.join(', ');
+
+                    const photoImg = document.createElement('img');
+                    photoImg.src = student.Photo;
+                    photoImg.alt = student.name + "'s Photo";
+
+                    const likeButton = document.createElement('button');
+                    likeButton.textContent = 'Like';
+                    likeButton.classList.add('like-button'); // Add like button class
+                    let likeCount = 0;
+                    likeButton.addEventListener('click', function() {
+                        likeCount++; // Increment like count
+                        // Display alert message
+                        alert('Liked ' + student.Name + '\'s profile! Total likes: ' + likeCount);
+                    });
+
+                    // Append elements to profile div
+                    aside.appendChild(name);
+                    aside.appendChild(age);
+                    aside.appendChild(gender);
+                    aside.appendChild(roll);
+                    aside.appendChild(year);
+                    aside.appendChild(interestsPara);
+                    aside.appendChild(hobbiesPara);
+                    section.appendChild(photoImg);
+
+                    profileDiv.appendChild(section);
+                    profileDiv.appendChild(aside);
+                    profileDiv.appendChild(likeButton);
+
+                    profilesContainer.appendChild(profileDiv); // Append profile div to container
+                });
+            })
+            .catch(function(error) {
+                console.error('Error fetching data:', error); // Log any errors
+            });
+    </script>
+</body>
+</html>
+
+

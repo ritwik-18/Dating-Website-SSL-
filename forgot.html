@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="forgot.css"> <!-- Linking the CSS file for styling -->
+</head>
+
+<body>
+    <div class="background-image"></div> <!-- Background image element -->
+    <fieldset>
+        <h2 class="heading">Forgot Password</h2> <!-- Heading for the forgot password form -->
+        <div class="group">
+            <label for="username" class="label">Username</label> <!-- Username label -->
+            <input id="username" type="text" class="input"> <!-- Username input field -->
+        </div>
+        <div class="group">
+            <input type="submit" class="button" value="Submit" onclick="validateun()"> <!-- Submit button -->
+        </div>
+        <div id="qnbox" style="display: none;"> <!-- Section for secret question -->
+            <b><p id="secretqn"></p></b> <!-- Display secret question -->
+            <label class="label" for="secretAnswer">Your Answer:</label> <!-- Label for secret answer input -->
+            <input class="input" type="text" id="secretAnswer" name="secretAnswer"><br><br> <!-- Input field for secret answer -->
+            <button type="button" class="s2" onclick="checkAnswer()">Submit</button><br> <!-- Submit button for secret answer -->
+        </div>
+        <div id="result" style="display: none;"> <!-- Section to display password -->
+            <b><p id="password"></p></b> <!-- Display password -->
+        </div>
+        <div>
+           <br> <button type="button" class="go" onclick="window.location.href='login.html'">Go back to Login!</button> <!-- Button to go back to login page -->
+        </div>
+    </fieldset>
+    <script src="forgot.js"></script> <!-- Linking the JavaScript file for functionality -->
+</body>
+
+</html>

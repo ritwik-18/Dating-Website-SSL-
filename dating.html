@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+<body>
+    <div class="background-image"></div>
+
+    <fieldset>
+        <b><h2 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> Fill Details...Find your Match!!!</h2></b>
+        <div class="group">
+            <label for="roll" class="label"><b>IITB Roll Number:</b></label>
+            <input id="roll" type="text" class="input">
+        </div>
+        <div class="group">
+            <label for="name" class="label"><b>Name:</b></label>
+            <input id="name" type="text" class="input">
+        </div>
+        <div class="group">
+            <label for="year" class="label"><b>Year of Study:</b></label>
+            <input id="year" type="number" class="input">
+        </div>
+        <div class="group">
+            <label for="age" class="label"><b>Age:</b></label>
+            <input id="age" type="number" class="input">
+        </div>
+        <div class="group">
+            <label for="gender" class="label"><b>Gender:</b></label>
+            <input type="radio" id="male" name="gender" value="Male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="Female">
+            <label for="female">Female</label>
+            <input type="radio" id="others" name="gender" value="Others">
+            <label for="others">Others</label>
+        </div>
+        <div class="group">
+            <label for="email" class="label"><b>Email:</b></label>
+            <input type="email" id="email" class="input">
+        </div>
+        <div class="group">
+            <label for="interests" class="label"><b>Interests:</b></label>
+            <input type="checkbox" id="travelling" name="interests" value="Travelling">
+            <label for="travelling">Travelling</label>
+            <input type="checkbox" id="sports" name="interests" value="Sports">
+            <label for="sports">Sports</label>
+            <input type="checkbox" id="movies" name="interests" value="Movies">
+            <label for="movies">Movies</label>
+            <input type="checkbox" id="music" name="interests" value="Music">
+            <label for="music">Music</label>
+            <input type="checkbox" id="literature" name="interests" value="Literature">
+            <label for="literature">Literature</label>
+            <input type="checkbox" id="technology" name="interests" value="Technology">
+            <label for="technology">Technology</label>
+            <input type="checkbox" id="fashion" name="interests" value="Fashion">
+            <label for="fashion">Fashion</label>
+            <input type="checkbox" id="art" name="interests" value="Art">
+            <label for="art">Art</label>
+        </div>
+        <div class="group">
+            <label for="hobbies" class="label"><b>Hobbies:</b></label>
+            <input type="checkbox" id="reading" name="hobbies" value="Reading">
+            <label for="reading">Reading</label>
+            <input type="checkbox" id="cooking" name="hobbies" value="Cooking">
+            <label for="cooking">Cooking</label>
+            <input type="checkbox" id="coding" name="hobbies" value="Coding">
+            <label for="coding">Coding</label>
+            <input type="checkbox" id="gardening" name="hobbies" value="Gardening">
+            <label for="gardening">Gardening</label>
+            <input type="checkbox" id="painting" name="hobbies" value="Painting">
+            <label for="painting">Painting</label>
+            <input type="checkbox" id="watching" name="hobbies" value="Watching YouTube/Instagram">
+            <label for="watching">Watching YouTube/Instagram</label>
+            <input type="checkbox" id="playing" name="hobbies" value="Playing Musical Instruments">
+            <label for="playing">Playing Musical Instruments</label>
+            <input type="checkbox" id="photography" name="hobbies" value="Photography">
+            <label for="photography">Photography</label>
+        </div>
+        <div class="group">
+            <input type="button" class="button" value="Submit" onclick=findMatch()>
+        </div>
+        <div>
+            <input type="button" value="Scroll through profiles!" onclick="window.location.href='scroll_or_swipe.html'">
+            <input type="button" value="Logout" onclick="window.location.href='login.html'">
+        </div>
+        <p id="hi"></p>
+    </fieldset>
+    <script src="script.js"></script>
+</body>
+
+</html>
